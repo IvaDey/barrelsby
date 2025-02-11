@@ -1,6 +1,6 @@
 {
-  "name": "barrelsby",
-  "version": "2.8.1",
+  "name": "@ivadey/barrelsby",
+  "version": "3.0.0-alpha.1",
   "description": "Automatic TypeScript barrels for your entire code base",
   "main": "index.js",
   "scripts": {

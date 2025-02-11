@@ -70,7 +70,7 @@ export function buildImportPath(directory: Directory, target: FileTreeLocation, 
     directoryPath = `.${path.sep}${directoryPath}`;
   }
   // Strip off the .ts or .tsx from the file name.
-  const fileName = getBasename(relativePath);
+  const fileName = getBasename(relativePath)+'.js';
   // Build the final path string. Use posix-style seperators.
   const location = `${directoryPath}${path.sep}${fileName}`;
   const convertedLocation = convertPathSeparator(location);
