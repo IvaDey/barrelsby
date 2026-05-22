@@ -1,4 +1,5 @@
 import * as Destinations from './destinations';
+import * as ExpandDirectories from './expandDirectories';
 import * as FileTree from './fileTree';
 import { Barrelsby } from './index';
 import * as BarrelName from './options/barrelName';
@@ -60,6 +61,11 @@ describe('main module', () => {
     const barrelName = 'barrel.ts';
     const getBarrelNameSpy = spySandbox.stub(BarrelName, 'getBarrelName').returns(barrelName);
 
+    const expandedDirectories = ['testRootPath'];
+    const expandDirectoriesSpy = spySandbox
+      .stub(ExpandDirectories, 'expandDirectories')
+      .returns(expandedDirectories);
+
     const rootPath = './directory';
     const resolveRootPathSpy = spySandbox.stub(RootPath, 'resolveRootPath').returns(rootPath);
 
@@ -73,6 +79,7 @@ describe('main module', () => {
     expect(getLoggerSpy.calledOnceWithExactly({ isVerbose: true })).toBeTruthy();
     expect(getBarrelNameSpy.calledOnceWithExactly(args.name, signale)).toBeTruthy();
     expect(resolveRootPathSpy.calledWithExactly('testRootPath')).toBeTruthy();
+    expect(expandDirectoriesSpy.calledOnceWithExactly(args.directory, signale)).toBeTruthy();
     expect(getCombinedBaseUrlSpy.calledOnceWithExactly(rootPath, args.baseUrl)).toBeTruthy();
     expect(buildTreeSpy.calledOnceWithExactly(rootPath, barrelName, signale)).toBeTruthy();
     expect(getDestinationsSpy.calledOnceWithExactly(builtTree, args.location, barrelName, signale)).toBeTruthy();

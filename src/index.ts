@@ -2,6 +2,7 @@
 
 import { build } from './builder';
 import { getDestinations } from './destinations';
+import { expandDirectories } from './expandDirectories';
 import { buildTree } from './fileTree';
 import { getBarrelName } from './options/barrelName';
 import { getCombinedBaseUrl } from './options/baseUrl';
@@ -23,7 +24,11 @@ export function Barrelsby(args: Arguments) {
 
   logger.debug(`Directories passed`, directories);
 
-  const resolvedDirectories = directories.map(directory => {
+  const expandedDirectories = expandDirectories(directories, logger);
+
+  logger.debug(`Directories after glob expansion`, expandedDirectories);
+
+  const resolvedDirectories = expandedDirectories.map(directory => {
     const rootPath = resolveRootPath(directory);
     logger.debug('Resolved root path %s', rootPath);
     return {
